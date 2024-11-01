@@ -23,13 +23,13 @@ class TCN_decoder(nn.Module):
     
         self.network = nn.Sequential(*layers)
         
-        self.mlp = nn.Sequential(
-            nn.Flatten(),
-            nn.Linear(layer_list[-1]*max_len, 128),
-            nn.ReLU(),
-            nn.Linear(128, 1),
-            nn.ReLU()
-        )
+        # self.mlp = nn.Sequential(
+        #     nn.Flatten(),
+        #     nn.Linear(layer_list[-1]*max_len, 128),
+        #     nn.ReLU(),
+        #     nn.Linear(128, 1),
+        #     nn.ReLU()
+        # )
         
     def forward(self, X):
         N, T, H, W = X.shape
@@ -40,7 +40,7 @@ class TCN_decoder(nn.Module):
         
         X = X.view(N, T)
         X = nn.functional.avg_pool1d(X, T)
-        X = self.mlp(X)
+        # X = self.mlp(X)
         
         return X
 
